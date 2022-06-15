@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeysToComprasTable extends Migration
+class CreateAcessoModulosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddForeignKeysToComprasTable extends Migration
      */
     public function up()
     {
-        Schema::table('compras', function (Blueprint $table) {
-            $table->foreign('usuarioid')->references('id')->on('usuarios');
+        Schema::create('acesso_modulos', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('moduloid')->nullable()->index('moduloid');
+            $table->string('nome', 250)->nullable();
         });
     }
 
@@ -25,8 +27,6 @@ class AddForeignKeysToComprasTable extends Migration
      */
     public function down()
     {
-        Schema::table('compras', function (Blueprint $table) {
-            $table->dropForeign('usuarioid');
-        });
+        Schema::dropIfExists('acesso_modulos');
     }
 }

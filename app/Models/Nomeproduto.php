@@ -6,9 +6,8 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Nomeproduto
@@ -17,20 +16,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $nome
  * @property int|null $categoriaid
  * @property int|null $marcaid
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property string|null $deleted_at
  * 
  * @property Categoria|null $categoria
  * @property Marca|null $marca
+ * @property Collection|Comprasprodutotemporario[] $comprasprodutotemporarios
  *
  * @package App\Models
  */
 class Nomeproduto extends Model
 {
-	use SoftDeletes;
 	protected $table = 'nomeproduto';
 	public $incrementing = false;
+	public $timestamps = false;
 
 	protected $casts = [
 		'id' => 'int',
@@ -52,5 +49,10 @@ class Nomeproduto extends Model
 	public function marca()
 	{
 		return $this->belongsTo(Marca::class, 'marcaid');
+	}
+
+	public function comprasprodutotemporarios()
+	{
+		return $this->hasMany(Comprasprodutotemporario::class, 'nomeprodutoid');
 	}
 }

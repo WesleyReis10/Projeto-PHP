@@ -267,12 +267,8 @@ return [
                     'url'  => '/produto',
                 ],
                 [
-                    'text' => 'Clientes',
-                    'url'  => '/cliente',
-                ],
-                [
                     'text' => 'Colaboradores',
-                    'url'  => '/colaborador',
+                    'url'  => '/usuario',
                 ],
             ],
         ],
@@ -329,7 +325,7 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
@@ -374,7 +370,7 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

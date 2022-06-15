@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateListasEmpresasTable extends Migration
+class CreateNomeprodutoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CreateListasEmpresasTable extends Migration
      */
     public function up()
     {
-        Schema::create('listas_empresas', function (Blueprint $table) {
+        Schema::create('nomeproduto', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('usuarioid')->nullable()->index('usuarioid');
-            $table->unsignedBigInteger('empresaid')->nullable()->index('empresaid');
+            $table->string('nome', 200)->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->unsignedBigInteger('categoriaid')->nullable();
+            $table->unsignedBigInteger('marcaid')->nullable();
+
         });
     }
 
@@ -29,6 +32,6 @@ class CreateListasEmpresasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('listas_empresas');
+        Schema::dropIfExists('nomeproduto');
     }
 }

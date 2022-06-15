@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddEmpresaidToMarcasTable extends Migration
+class AddValorvendaToComprasprodutotemporarioTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class AddEmpresaidToMarcasTable extends Migration
      */
     public function up()
     {
-        Schema::table('marcas', function (Blueprint $table) {
+        Schema::table('comprasprodutotemporario', function (Blueprint $table) {
             //
-            $table->unsignedBigInteger('empresaid')->nullable();
-            $table->foreign('empresaid')->references('id')->on('empresas');
+            $table->decimal('valorvenda', 10)->nullable();
         });
     }
 
@@ -27,10 +26,9 @@ class AddEmpresaidToMarcasTable extends Migration
      */
     public function down()
     {
-        Schema::table('marcas', function (Blueprint $table) {
+        Schema::table('comprasprodutotemporario', function (Blueprint $table) {
             //
-            $table->dropForeign(['empresaid']);
-            $table->dropColumn('empresaid');
+            $table->dropColumn('valorvenda');
         });
     }
 }

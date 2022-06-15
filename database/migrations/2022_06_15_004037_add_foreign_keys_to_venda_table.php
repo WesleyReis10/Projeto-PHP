@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCodigodebarraunicoToProdutosTable extends Migration
+class AddForeignKeysToVendaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class AddCodigodebarraunicoToProdutosTable extends Migration
      */
     public function up()
     {
-        Schema::table('produtos', function (Blueprint $table) {
-            //
-            $table->unsignedBigInteger('codigodebarraunico')->nullable()->index('codigodebarraunico');
+        Schema::table('venda', function (Blueprint $table) {
+            $table->foreign(['usuarioid'], 'venda_ibfk_1')->references(['id'])->on('usuarios')->onUpdate('NO ACTION')->onDelete('NO ACTION');
         });
     }
 
@@ -26,9 +25,8 @@ class AddCodigodebarraunicoToProdutosTable extends Migration
      */
     public function down()
     {
-        Schema::table('produtos', function (Blueprint $table) {
-            //
-            $table->dropColumn('codigodebarraunico');
+        Schema::table('venda', function (Blueprint $table) {
+            $table->dropForeign('venda_ibfk_1');
         });
     }
 }

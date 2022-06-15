@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeysToNomeprodutosTable extends Migration
+class CreateModulosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class AddForeignKeysToNomeprodutosTable extends Migration
      */
     public function up()
     {
-        Schema::table('nomeprodutos', function (Blueprint $table) {
-            //
-            $table->foreign('empresaid')->references('id')->on('empresas');
+        Schema::create('modulos', function (Blueprint $table) {
+            $table->id();
+            $table->string('nome', 250)->nullable();
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,9 +28,6 @@ class AddForeignKeysToNomeprodutosTable extends Migration
      */
     public function down()
     {
-        Schema::table('nomeprodutos', function (Blueprint $table) {
-            //
-            $table->dropForeign(['empresaid']);
-        });
+        Schema::dropIfExists('modulos');
     }
 }

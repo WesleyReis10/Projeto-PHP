@@ -6,9 +6,7 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class ItensVenda
@@ -17,9 +15,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int|null $produtoid
  * @property int|null $vendaid
  * @property float|null $valor
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property string|null $deleted_at
  * 
  * @property Produto|null $produto
  * @property Venda|null $venda
@@ -28,9 +23,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class ItensVenda extends Model
 {
-	use SoftDeletes;
 	protected $table = 'itens_vendas';
 	public $incrementing = false;
+	public $timestamps = false;
 
 	protected $casts = [
 		'id' => 'int',

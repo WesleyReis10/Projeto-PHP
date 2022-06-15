@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeysToUsuariosTable extends Migration
+class AddColumnToProdutosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddForeignKeysToUsuariosTable extends Migration
      */
     public function up()
     {
-        Schema::table('usuarios', function (Blueprint $table) {
-            $table->foreign(['empresaid'], 'usuarios_ibfk_1')->references(['id'])->on('empresas')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+        Schema::table('produtos', function (Blueprint $table) {
+            //
+            $table->string('codigodebarraunico', 250)->nullable();
+
+
         });
     }
 
@@ -25,8 +28,10 @@ class AddForeignKeysToUsuariosTable extends Migration
      */
     public function down()
     {
-        Schema::table('usuarios', function (Blueprint $table) {
-            $table->dropForeign('usuarios_ibfk_1');
+        Schema::table('produtos', function (Blueprint $table) {
+            //
+            $table->dropColumn('codigodebarraunico');
+
         });
     }
 }

@@ -16,7 +16,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $nome
  * 
  * @property Modulo|null $modulo
- * @property Compra|null $compra
  *
  * @package App\Models
  */
@@ -39,10 +38,5 @@ class AcessoModulo extends Model
 	public function modulo()
 	{
 		return $this->belongsTo(Modulo::class, 'moduloid');
-	}
-
-	public function compra()
-	{
-		return $this->belongsTo(Compra::class, 'moduloid');
 	}
 }

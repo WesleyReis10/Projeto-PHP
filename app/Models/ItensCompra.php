@@ -6,22 +6,19 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class ItensCompra
- * 
+ *
  * @property int|null $id
  * @property int|null $compraid
  * @property int|null $produtoid
  * @property float|null $valor
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property string|null $deleted_at
- * 
+ *
  * @property Compra|null $compra
+ * @property Produto|null $produto
  *
  * @package App\Models
  */
@@ -29,7 +26,8 @@ class ItensCompra extends Model
 {
 	use SoftDeletes;
 	protected $table = 'itens_compras';
-	public $incrementing = false;
+	public $incrementing = true;
+	public $timestamps = true;
 
 	protected $casts = [
 		'id' => 'int',
@@ -48,5 +46,10 @@ class ItensCompra extends Model
 	public function compra()
 	{
 		return $this->belongsTo(Compra::class, 'compraid');
+	}
+
+	public function produto()
+	{
+		return $this->belongsTo(Produto::class, 'produtoid');
 	}
 }

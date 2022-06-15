@@ -6,33 +6,31 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Compra
- * 
+ *
  * @property int $id
  * @property string|null $descricao
  * @property string|null $status
  * @property int|null $usuarioid
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
  * @property string|null $deleted_at
- * 
+ *
  * @property Usuario|null $usuario
- * @property Collection|AcessoModulo[] $acesso_modulos
+ * @property Collection|Comprasprodutotemporario[] $comprasprodutotemporarios
  * @property ItensCompra $itens_compra
  *
  * @package App\Models
  */
 class Compra extends Model
 {
-	use SoftDeletes;
+    use SoftDeletes;
 	protected $table = 'compras';
-	public $incrementing = false;
+	public $incrementing = true;
+	public $timestamps = true;
 
 	protected $casts = [
 		'id' => 'int',
@@ -50,13 +48,13 @@ class Compra extends Model
 		return $this->belongsTo(Usuario::class, 'usuarioid');
 	}
 
-	public function acesso_modulos()
+	public function comprasprodutotemporarios()
 	{
-		return $this->hasMany(AcessoModulo::class, 'moduloid');
+		return $this->hasMany(Comprasprodutotemporario::class, 'compraid');
 	}
 
 	public function itens_compra()
 	{
-		return $this->hasOne(ItensCompra::class, 'compraid');
+		return $this->hasMany(ItensCompra::class, 'compraid');
 	}
 }

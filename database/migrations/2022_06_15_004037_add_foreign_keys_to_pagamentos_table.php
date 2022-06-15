@@ -14,7 +14,7 @@ class AddForeignKeysToPagamentosTable extends Migration
     public function up()
     {
         Schema::table('pagamentos', function (Blueprint $table) {
-            $table->foreign(['vendaid'], 'pagamentos_ibfk_1')->references(['id'])->on('venda')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+            $table->foreign(['vendaid'], 'pagamentos_ibfk_2')->references(['id'])->on('venda')->onUpdate('NO ACTION')->onDelete('NO ACTION');
         });
     }
 
@@ -27,6 +27,7 @@ class AddForeignKeysToPagamentosTable extends Migration
     {
         Schema::table('pagamentos', function (Blueprint $table) {
             $table->dropForeign('pagamentos_ibfk_1');
+            $table->dropForeign('pagamentos_ibfk_2');
         });
     }
 }
